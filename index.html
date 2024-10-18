@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Minepay</title>
+    <title>GrocLake</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -53,7 +53,7 @@
             /* Adjust the height as needed */
             background-color: #F2F8FE;
             /* Adjust the background color as needed */
-            pointer-events: none;
+            /* pointer-events: none; */
         }
 
         .container-fluid.hero-header {
@@ -180,12 +180,52 @@
     z-index: 1000;
 }
 
+/* Basic Styling for Navbar */
 .navbar-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Keeps the logo and links apart */
+    justify-content: space-between;
     padding: 15px 30px;
 }
+
+.nav-links-container {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive Navbar - Hide links on small screens */
+@media (max-width: 768px) {
+    .nav-links-container {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        background-color: #34495e;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        padding: 10px;
+        z-index: 1000;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .nav-links-container.show {
+        display: flex;
+    }
+}
+
 
 .logo {
     height: 100px; /* Adjust height as needed */
@@ -395,22 +435,21 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div class="navbar">
+        <nav class="navbar">
             <div class="navbar-container">
-                <img src="assets/logo.png" alt="Logo" class="logo">
-                <div class="nav-links">
-                    <a href="#" class="nav-link">Home</a>
-                    <div class="dropdown">
-                        <a href="#" class="nav-link" id="explore">Explore</a>
-                        <div class="dropdown-content">
-                            <a href="https://www.google.com" target="_blank">VectorLake</a>
-                            <a href="https://www.google.com" target="_blank">CatalogLake</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </div>
+              <img src="assets/logo.png" alt="Logo" class="logo">
+              <button class="navbar-toggle">
+                <i class="fas fa-bars"></i>  <!-- FontAwesome icon for hamburger -->
+              </button>
+              <div class="nav-links-container">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+              </div>
             </div>
-        </div>
+        </nav>
+          
+        
         
         
     
@@ -624,31 +663,45 @@
     <script>
         const exploreLink = document.getElementById('explore');
         const dropdownContent = document.querySelector('.dropdown-content');
-
+    
         exploreLink.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
             dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
         });
-
+    
         // Close the dropdown if clicked outside
         window.addEventListener('click', function(event) {
             if (!event.target.matches('#explore') && !event.target.closest('.dropdown')) {
                 dropdownContent.style.display = 'none';
             }
         });
-
+    
         document.querySelectorAll('.station').forEach(station => {
-        station.addEventListener('mouseover', function() {
-            const date = this.getAttribute('data-date');
-            const info = this.getAttribute('data-info');
-            document.querySelector('.info-date').textContent = date;
-            document.querySelector('.info-description').textContent = info;
+            station.addEventListener('mouseover', function() {
+                const date = this.getAttribute('data-date');
+                const info = this.getAttribute('data-info');
+                document.querySelector('.info-date').textContent = date;
+                document.querySelector('.info-description').textContent = info;
+            });
         });
-    });
-    </script>
+    
+        document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.querySelector('.navbar-toggle');
+    const navLinksContainer = document.querySelector('.nav-links-container');
 
+    if (toggleButton && navLinksContainer) {
+        toggleButton.addEventListener('click', function () {
+            navLinksContainer.classList.toggle('show');
+        });
+    } else {
+        console.error('Navbar toggle button or nav links container not found');
+    }
+});
+    </script>
+    
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    
 </body>
 
 </html>
