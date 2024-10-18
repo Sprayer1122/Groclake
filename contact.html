@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Minepay</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="assets/favicon_round.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <style>
+         body {
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column; /* Ensure children stack vertically */
+    align-items: center; /* Center horizontally */
+    height: 100vh; /* Use viewport height */
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+
+.terminal {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    width: 600px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 80px 0 20px; /* Add more space above to account for the navbar */
+    flex-grow: 1;
+}
+
+
+
+        .header {
+            background-color: #2e2e2e;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+            margin-right: auto;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .red { background-color: #ff605c; }
+        .yellow { background-color: #ffbd44; }
+        .green { background-color: #00ca4e; }
+
+        .dot:hover {
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .title {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .instructions {
+            padding: 10px;
+            font-weight: bold;
+            color: #bbbbbb;
+            line-height: 1.2;
+        }
+
+        .output {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-weight: bold;
+            color: #dcdcdc;
+            margin: 0;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-top: 1px solid #333;
+            gap: 5px;
+        }
+
+        .path {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .input {
+            background-color: transparent;
+            border: none;
+            color: white;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            caret-color: white;
+        }
+
+        .input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+
+        .opaque-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            /* Adjust the height as needed */
+            background-color: #F2F8FE;
+            /* Adjust the background color as needed */
+            pointer-events: none;
+        }
+
+        .container-fluid.hero-header {
+            padding: 0;
+            height: 100vh;
+            position: relative;
+        }
+
+        .s-page-1 {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .s-section-1 {
+            width: 100%;
+        }
+
+        .s-section {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .content-container {
+            width: 40%;
+
+            @media (max-width: 991px) {
+                width: 100%;
+            }
+        }
+
+        .gradient-footer {
+    background: linear-gradient(to bottom right, #141e30 0%, #243b55 100%);
+    color: rgb(255, 255, 255);
+    padding: 20px 0;
+}
+
+
+.bubble {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    background-color: #74c7d6;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: floatBubble var(--animation-duration) ease-in-out infinite;
+    background: linear-gradient(to bottom right, #2AF8F5 0%, #4F64E5 100%);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bubble h5 {
+    text-align: center;
+}
+
+.bubble:hover {
+    transform: scale(1.1);
+}
+
+@keyframes floatBubble {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes fadeInScaleAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Keeps the logo and links apart */
+    padding: 5px 30px;
+}
+
+.logo {
+    height: 100px; /* Adjust height as needed */
+    /* margin-right: 30px; Add spacing between logo and links */
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1; /* Allows the nav links to take available space */
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px; /* Spacing between individual links */
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #1de9b6; /* Change this color to match your theme */
+    transform: scale(1.1);
+}
+
+.nav-link::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #1de9b6; /* Change this color to match your theme */
+    width: 0;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #34495e; /* Match dropdown with hover color */
+    min-width: 160px;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for dropdown */
+    z-index: 1;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s ease; /* Smooth fade-in */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s; /* Smooth background change */
+}
+
+.dropdown-content a:hover {
+    background-color: #2c3e50; /* Darker color on hover */
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1; /* Show with fade effect */
+}
+
+/* Add a focus effect for accessibility */
+.nav-link:focus {
+    outline: 2px solid #e74c3c; /* Outline for focus */
+    outline-offset: 2px; /* Offset for better visibility */
+}
+
+.gradient-footer {
+    background: linear-gradient(to bottom right, #141e30 0%, #243b55 100%);
+    color: rgb(255, 255, 255);
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+
+.footer {
+    background: linear-gradient(to bottom right, #141e30 0%, #243b55 100%);
+    color: rgb(255, 255, 255);
+    padding: 20px 0;
+    width: 100%; /* Full width */
+    text-align: center;
+    margin-top: auto; /* Ensure footer stays at bottom */
+}
+
+.footer p {
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+    </style>
+
+
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <div class="navbar">
+        <div class="navbar-container">
+            <img src="assets/logo.png" alt="Logo" class="logo">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link" id="explore">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="https://www.google.com" target="_blank">VectorLake</a>
+                        <a href="https://www.google.com" target="_blank">CatalogLake</a>
+                    </div>
+                </div>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="terminal">
+        <div class="header">
+            <div class="buttons">
+                <div class="dot red" title="Close"></div>
+                <div class="dot yellow" title="Minimize"></div>
+                <div class="dot green" title="Maximize"></div>
+            </div>
+            <div class="title">Terminal</div>
+        </div>
+        <div class="instructions">
+            Welcome to the Terminal For Help.<br>
+            Type commands below to simulate terminal behavior.<br>
+            Special queries will return specific responses.<br>
+        </div>
+        <div class="output" id="output"></div>
+        <div class="input-container">
+            <span class="path" id="path">/groc/plotch $</span>
+            <input type="text" class="input" id="commandInput" placeholder="Type your command here..." />
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+<footer class="gradient-footer text-center py-4">
+    <div class="container">
+        <h2 style="color: #ffffff;">GrocLake</h2>
+        <p style="color: #ffffff; margin-bottom: 10px;">Empowering your development with cutting-edge tools.</p>
+        <div class="social-icons">
+            <a href="#" class="text-light mx-2"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-light mx-2"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light mx-2"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="text-light mx-2"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="mt-3">
+            <p style="color: #ffffff;">© 2024 GrocLake. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<!-- Footer End -->
+
+    <script src="https://cdn.vanta.io/vanta.waves.min.js"></script>
+    <script>
+        VANTA.WAVES({
+            el: document.body,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1b1b1b,
+            shininess: 50.00,
+            waveHeight: 20.00,
+            waveSpeed: 1.00,
+            zoom: 1.00
+        });
+    </script>
+
+
+    <script>
+        const input = document.getElementById('commandInput');
+        const output = document.getElementById('output');
+        const path = document.getElementById('path').textContent;
+
+        // Command handler with logic
+        input.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' && input.value.trim() !== '') {
+                const command = input.value.trim().toLowerCase();
+                let response = "error";  // Default response
+
+                // Logic for specific queries
+                if (command === 'clear') {
+                    output.innerHTML = ''; // Clear output
+                    input.value = ''; // Clear input
+                    return;
+                } else if (command.includes('email')) {
+                    response = "groc@gmail.com";
+                } else if (command.includes('phone') || command.includes('number')) {
+                    response = "89898989";
+                } else if (command.includes('what is groc')) {
+                    response = "General Rails of Commerce";
+                }
+
+                // Display the command and response in the terminal
+                const newLine = document.createElement('div');
+                newLine.innerHTML = `<span class="path">${path}</span> ${command}<br>${response}`;
+
+                output.appendChild(newLine);
+                input.value = '';
+                output.scrollTop = output.scrollHeight;  // Scroll to the bottom
+            }
+        });
+    </script>
+
+
+
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+            class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+
+    <!-- Custom Navbar Script -->
+    <script>
+        const exploreLink = document.getElementById('explore');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        exploreLink.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close the dropdown if clicked outside
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('#explore') && !event.target.closest('.dropdown')) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+
+        document.querySelectorAll('.station').forEach(station => {
+        station.addEventListener('mouseover', function() {
+            const date = this.getAttribute('data-date');
+            const info = this.getAttribute('data-info');
+            document.querySelector('.info-date').textContent = date;
+            document.querySelector('.info-description').textContent = info;
+        });
+    });
+    </script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
